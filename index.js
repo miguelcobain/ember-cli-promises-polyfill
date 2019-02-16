@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path');
-const Funnel = require('broccoli-funnel');
 const caniuse = require('caniuse-api');
 
 function findHostShim() {
@@ -18,7 +16,7 @@ module.exports = {
 
   included() {
     if (this.shouldImportPolyfill()) {
-      this._import('vendor/es6-promise/es6-promise.auto.js');
+      this._import('vendor/rsvp-promise-polyfill.js');
     }
   },
 
@@ -32,16 +30,8 @@ module.exports = {
     }
   },
 
-  treeForVendor() {
-    let modulePath = path.dirname(require.resolve('es6-promise'));
-    return new Funnel(modulePath, {
-      destDir: 'es6-promise'
-    });
-  },
-
   shouldImportPolyfill() {
     let browsers = this.project.targets && this.project.targets.browsers;
-    console.log(caniuse.isSupported('promises', browsers));
     return !browsers || !caniuse.isSupported('promises', browsers);
   }
 };

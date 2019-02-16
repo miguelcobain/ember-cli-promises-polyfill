@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/ember-cli-promises-polyfill.svg)](https://badge.fury.io/js/ember-cli-promises-polyfill)
 
 Ember-CLI addon to add a polyfill for the [`Promise`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-property, based on [es6-promise](https://github.com/stefanpenner/es6-promise).
+property, based on Ember's included RSVP.
 
 Internet Explorer 11 and lower do not support `Promise`. 
 See full [browser support details](https://caniuse.com/#feat=promises).
@@ -19,6 +19,8 @@ ember install ember-cli-promises-polyfill
 ## Usage
 
 The addon will import the polyfill by default to your `vendor.js`. 
+
+The polyfill essentially assigns `window.Promise = Ember.RSVP.Promise;`, if your target browser does not have `window.Promise` defined.
 
 Beginning with version 2.13 Ember CLI supports a [Targets](http://rwjblue.com/2017/04/21/ember-cli-targets/) feature, 
 allowing you to specify the list of browsers your app should support like `last 1 Chrome versions` or `ie 11`.
